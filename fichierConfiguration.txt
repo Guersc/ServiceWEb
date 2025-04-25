@@ -1,0 +1,82 @@
+Documentation de l'API Étudiants
+
+Cette API permet de gérer les informations des étudiants et leurs cotes. Elle offre des fonctionnalités pour l'inscription des étudiants, la gestion des cotes et l'accès aux données via des endpoints RESTful.
+
+ Configuration de l'environnement
+
+- Version de Laravel : Laravel Framework 12.10.1
+- Serveur Web : Apache/2.4.54 (Win64) [Apache/Nginx]
+- Base de Données : mysql
+- Fichiers de Configuration: .env pour la configuration de l'environnement.
+
+Modèles
+
+Modèle `Etudiant`
+- Attributs :
+  - `nom`: string
+  - `post_nom`: string
+  - `prenom`: string
+  - `genre`: string
+  - `date_naissance`: date
+  - `matricule`: string
+  - `email`: string
+  - `password`: string
+- Relations : a plusieurs cotes.
+
+Modèle `Cote`
+- Attributs :
+  - `etudiant_id`: int (clé étrangère)
+  - `nom_cours`: string
+  - `note`: float
+- Relations : appartient à un étudiant.
+
+
+ Contrôleurs
+
+ Contrôleur `EtudiantController`
+- Méthodes :
+  - `inscrire(Request $request)`: Inscrit un nouvel étudiant.
+  - `obtenirTousLesEtudiants()`: Récupère tous les étudiants.
+  - `obtenirEtudiantParId($id)`: Récupère un étudiant par son ID.
+  - `mettreAJourEtudiant(Request $request, $id)`: Met à jour les informations d'un étudiant.
+  - `supprimerEtudiant($id)`: Supprime un étudiant.
+
+ Contrôleur `CoteController`
+- Méthodes :
+  - `ajouterCote(Request $request)`: Ajoute une nouvelle cote pour un étudiant.
+  - `obtenirCotesParEtudiant($etudiantId)`: Récupère toutes les cotes d'un étudiant.
+  - `mettreAJourCote(Request $request, $id)`: Met à jour une cote.
+  - `supprimerCote($id)`: Supprime une cote.
+
+ Routes
+
+- Ressources :
+  - `GET /resources`: Obtenir une liste de ressources.
+  - `POST /resources`: Créer une nouvelle ressource.
+  - `GET /resources/{id}`: Obtenir une ressource spécifique.
+  - `PUT /resources/{id}`: Mettre à jour une ressource.
+  - `DELETE /resources/{id}`: Supprimer une ressource.
+
+- Étudiants :
+  - `POST /etudiants`: Inscrire un nouvel étudiant.
+  - `GET /etudiants`: Obtenir tous les étudiants.
+  - `GET /etudiants/{id}`: Obtenir un étudiant par ID.
+  - `PUT /etudiants/{id}`: Mettre à jour un étudiant.
+  - `DELETE /etudiants/{id}`: Supprimer un étudiant.
+
+- Cotes :
+  - `POST /cotes`: Ajouter une cote.
+  - `GET /etudiants/{id}/cotes`: Obtenir les cotes d'un étudiant.
+  - `PUT /cotes/{id}`: Mettre à jour une cote.
+  - `DELETE /cotes/{id}`: Supprimer une cote.
+
+
+ Tests
+
+- Utilisation de **Insomnia** pour tester les endpoints.
+- Vérification des réponses des API pour s'assurer qu'elles renvoient les données attendues.
+- Tests des validations des données (ex. : champs obligatoires).
+
+Conclusion
+
+Cette API permet de gérer efficacement les informations relatives aux étudiants et à leurs cotes, avec une architecture RESTful bien définie. Des tests seront effectués pour assurer la fiabilité de l'API.
